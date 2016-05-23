@@ -1,0 +1,19 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 23.05.2016, 13:17:31
+    Author     : mdy
+*/
+
+.ccpTableWrap {
+    width: 100%;
+}
+
+.ccpTableTd {
+    padding: 0.25em;
+    border: 0.125em solid #D0D0D0;
+    text-align: center;
+}

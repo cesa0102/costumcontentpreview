@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<T3locallang>
+	<meta type="array">
+		<type>db</type>
+		<description>Language labels for database tables/fields belonging to extension 'seo_fields'</description>
+	</meta>
+	<data type="array">
+		<languageKey index="default" type="array">
+			<label index="pages.h2Headline">H2 Headline</label>
+			<label index="pages.titleSuffixCheck">Disable Title Suffix</label>
+                        <label index="tt_content.headerLinkText">Link Text</label>
+                        <label index="tt_content.headerLinkCheck">Activate Link Text</label>
+                        <label index="tt_content.geoLatitude">Latitude</label>
+                        <label index="tt_content.geoLongtitude">Longtitude</label>
+                        <label index="tt_content.youtubeId">Youtube Id</label>
+                        <label index="tt_content.tabHeadline">Headline</label>
+                        <label index="tt_content.tabBodytext">Content</label>
+                        <label index="tabs.infobox">Extra Content</label>
+		</languageKey>
+		<languageKey index="de" type="array">
+			<label index="pages.h2Headline">H2 Überschrift</label>
+			<label index="pages.titleSuffixCheck">Deaktiviere Titel Suffix</label>
+                        <label index="tt_content.headerLinkText">Link Text</label>
+                        <label index="tt_content.headerLinkCheck">Aktiviere Link Text</label>
+                        <label index="tt_content.geoLatitude">Latitude</label>
+                        <label index="tt_content.geoLongtitude">Longtitude</label>
+                        <label index="tt_content.youtubeId">Youtube Id</label>
+                        <label index="tt_content.tabHeadline">Überschrift</label>
+                        <label index="tt_content.tabBodytext">Inhalt</label>
+                        <label index="tabs.infobox">Extra Inhalt</label>
+		</languageKey>
+	</data>
+</T3locallang>
