@@ -1,6 +1,12 @@
 <?php
+
 if (!defined('TYPO3_MODE')) {
-	die('Access denied.');
+    die('Access denied.');
 }
 
-//\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile($_EXTKEY, 'Configuration/TypoScript', 'Better and customizable tt_content preview');
+$GLOBALS['TBE_STYLES']['skins']['costumcontentpreview'] = array(
+    'name' => 'costumcontentpreview',
+    'stylesheetDirectories' => array(
+        'css' => 'EXT:costumcontentpreview/Resources/Public/Css/typo3_backend/'
+    )
+);
