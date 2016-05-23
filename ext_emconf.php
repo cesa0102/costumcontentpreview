@@ -12,16 +12,16 @@
 
 $EM_CONF[$_EXTKEY] = array(
 	'title' => 'Better and customizable tt_content preview',
-	'description' => '',
+	'description' => 'Preview crop of the following tt_content elements: html, bullets, tabley',
 	'category' => 'plugin',
 	'author' => 'Christian Stern',
 	'author_email' => 'christian.stern@pornofilm-produzent.de',
-	'state' => 'alpha',
+	'state' => 'beta',
 	'internal' => '',
 	'uploadfolder' => '0',
 	'createDirs' => '',
 	'clearCacheOnLoad' => 0,
-	'version' => '0.1.1',
+	'version' => '0.1.2',
 	'constraints' => array(
 		'depends' => array(
 			'typo3' => '6.2.0-7.9.99',
