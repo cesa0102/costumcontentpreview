@@ -51,8 +51,4 @@ Cropped and better visibile content elements
 	:glob:
 
 	Introduction/Index
-	UsersManual/Index
 	AdministratorManual/Index
-	DeveloperManual/Index
-	Tutorials/Index
-	Misc/Index
