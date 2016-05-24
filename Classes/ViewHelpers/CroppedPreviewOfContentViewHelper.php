@@ -15,94 +15,108 @@ class CroppedPreviewOfContentViewHelper extends AbstractViewHelper {
      * Arguments Initialization
      */
     public function initializeArguments() {
-        $this->registerArgument(
-                'content', 'string', 'content to be used inside viewhelper. E.g. bodytext', TRUE
-        );
+	$this->registerArgument(
+		'content', 'string', 'content to be used inside viewhelper. E.g. bodytext', TRUE
+	);
 
-        $this->registerArgument(
-                'linesToCrop', 'int', 'amount of lines', FALSE, 3
-        );
 
-        $this->registerArgument(
-                'explodeRows', 'string', 'string to split content', FALSE
-        );
+	$this->registerArgument(
+		'linesToCrop', 'int', 'amount of lines', FALSE, 3
+	);
 
-        $this->registerArgument(
-                'explodeItems', 'string', 'string to split lines', FALSE
-        );
+	$this->registerArgument(
+		'explodeRows', 'string', 'string to split content', FALSE
+	);
 
-        $this->registerArgument(
-                'itemWrap', 'string', 'a wrap that will pear around each item', FALSE
-        );
+	$this->registerArgument(
+		'explodeItems', 'string', 'string to split lines', FALSE
+	);
 
-        $this->registerArgument(
-                'lineWrap', 'string', 'a wrap that will pear around each line', FALSE
-        );
+	$this->registerArgument(
+		'itemWrap', 'string', 'a wrap that will pear around each item', FALSE
+	);
 
-        $this->registerArgument(
-                'contentWrap', 'string', 'a wrap that will pear around the complete output', FALSE, "|"
-        );
+	$this->registerArgument(
+		'lineWrap', 'string', 'a wrap that will pear around each line', FALSE
+	);
+
+	$this->registerArgument(
+		'contentWrap', 'string', 'a wrap that will pear around the complete output', FALSE, "|"
+	);
     }
 
     private function splitNewLine($text) {
-        $code = preg_replace('/\n$/', '', preg_replace('/^\n/', '', preg_replace('/[\r\n]+/', "\n", $text)));
-        return explode("\n", $code);
+	$code = preg_replace('/\n$/', '', preg_replace('/^\n/', '', preg_replace('/[\r\n]+/', "\n", $text)));
+	return explode("\n", $code);
     }
 
     /**
      * @return string $output
      */
     public function render() {
-        $content = $this->arguments['content'];
-        $linesToCrop = intval($this->arguments['linesToCrop']);
-        $explodeRows = $this->arguments['explodeRows'];
-        $explodeItems = $this->arguments['explodeItems'];
-        $itemWrap = $this->arguments['itemWrap'];
-        $lineWrap = $this->arguments['lineWrap'];
-        $contentWrap = $this->arguments['contentWrap'];
+	$content = $this->arguments['content'];
+	$linesToCrop = intval($this->arguments['linesToCrop']);
+	$explodeRows = $this->arguments['explodeRows'];
+	$explodeItems = $this->arguments['explodeItems'];
+	$itemWrap = $this->arguments['itemWrap'];
+	$lineWrap = $this->arguments['lineWrap'];
+	$contentWrap = $this->arguments['contentWrap'];
 
-        $cObject = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer');
+	$cObject = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer');
 
-        if ($content && $linesToCrop > 0) {
-            if ($explodeRows) {
-                $contentLines = explode($explodeRows, $content);
-            } else {
-                $contentLines = $this->splitNewLine($content);
-            }
 
-            $contentAmoutOfLines = count($contentLines);
-            $croppedContentLines = array_splice($contentLines, 0, $linesToCrop);
+	if ($content && $linesToCrop > 0) {
+	    if ($explodeRows) {
+		$contentLines = explode($explodeRows, $content);
+	    } else {
+		$contentLines = $this->splitNewLine($content);
+	    }
 
-            foreach ($croppedContentLines as $singleLine) {
-                if ($explodeItems) {
-                    $contentRowItems = explode($explodeItems, $singleLine);
-                    $newSingleLine = "";
-                    foreach ($contentRowItems as $singleItem) {
-                        $newSingleLine .= $cObject->wrap($singleItem, $itemWrap);
-                    }
+	    $contentAmoutOfLines = count($contentLines);
+	    $croppedContentLines = array_splice($contentLines, 0, $linesToCrop);
 
-                    if ($lineWrap) {
-                        $output .= $cObject->wrap($newSingleLine, $lineWrap);
-                    } else {
-                        $output .= $singleLine . "\n";
-                    }
-                } else {
-                    if ($lineWrap) {
-                        $output .= $cObject->wrap($singleLine, $lineWrap);
-                    } else {
-                        $output .= $singleLine . "\n";
-                    }
-                }
-            }
+	    foreach ($croppedContentLines as $singleLine) {
+		if ($explodeItems) {
+		    $contentRowItems = explode($explodeItems, $singleLine);
+		    $newSingleLine = "";
+		    foreach ($contentRowItems as $singleItem) {
+			$newSingleLine .= $cObject->wrap($singleItem, $itemWrap);
+		    }
 
-            $output = $cObject->wrap($output, $contentWrap);
+		    if ($lineWrap) {
+			$output .= $cObject->wrap($newSingleLine, $lineWrap);
+		    } else {
+			$output .= $singleLine . "\n";
+		    }
+		} elseif (strpos($singleLine, '|') !== false && !$explodeItems) {
+		    $contentWrap = '<dl class="ccpDlWrap">|</dl>';
+		    $contentRowItems = explode("|", $singleLine);
+		    $newSingleLine = "";
+		    foreach ($contentRowItems as $i => $singleItem) {
+			if ($i % 2 == 0) {
+			    $output .= $cObject->wrap($singleItem, "<dt>|</dt>");			  
+			}
+			else {	
+			    $output .= $cObject->wrap($singleItem, "<dd>|</dd>");			  			    
+			}
+		    }
+		} else {
+		    if ($lineWrap) {
+			$output .= $cObject->wrap($singleLine, $lineWrap);
+		    } else {
+			$output .= $singleLine . "\n";
+		    }
+		}
+	    }
 
-            if ($contentAmoutOfLines > $linesToCrop) {
-                $output .= "...";
-            }
-        }
+	    $output = $cObject->wrap($output, $contentWrap);
 
-        return $output;
+	    if ($contentAmoutOfLines > $linesToCrop) {
+		$output .= "...";
+	    }
+	}
+
+	return $output;
     }
 
 }
