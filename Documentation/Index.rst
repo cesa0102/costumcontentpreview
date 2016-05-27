@@ -8,36 +8,33 @@
 
 .. _start:
 
-=============================================================
-Cropped and better visibile content elements
-=============================================================
+====================
+costumcontentpreview
+====================
 
 .. only:: html
 
 	:Classification:
-		news
+    		be-plugin
 
-	:Version:
-		|release|
+    :Version:
+        |release|
 
 	:Language:
-		en
+    		en
 
-	:Keywords:
-		tt_content,preview,html,bullets,table
+    :Copyright:
+        2016
 
-	:Copyright:
-		2016
+    :Author:
+        Christian Stern
 
-	:Author:
-		Christian Stern
-
-	:License:
-		This document is published under the Open Content License
-		available from http://www.opencontent.org/opl.shtml
+    :License:
+        This document is published under the Open Content License
+        available from http://www.opencontent.org/opl.shtml
 
 	:Rendered:
-		|today|
+    		|today|
 
 	The content of this document is related to TYPO3,
 	a GNU/GPL CMS/Framework available from `www.typo3.org <http://www.typo3.org/>`_.
@@ -48,7 +45,8 @@ Cropped and better visibile content elements
 .. toctree::
 	:maxdepth: 3
 	:titlesonly:
-	:glob:
+    	:glob:
 
-	Introduction/Index
-	AdministratorManual/Index
+    	Introduction/Index
+        Screenshots/Index
+    	Manual/Index

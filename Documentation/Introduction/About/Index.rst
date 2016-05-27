@@ -3,11 +3,21 @@
 .. --------------------------------------------------
 .. -*- coding: utf-8 -*- with BOM.
 
+.. include:: ../../Includes.txt
+
 .. _about:
 
-What does it do?
-================
-This extension gives a different preview for the following content-elements: html, table, bullets (ul/dl)
+=====
+About
+=====
 
-- Based on extbase & fluid
-- Easy to use & understand for editors
+.. only:: html
+
+Costumcontentpreview is an extension that gives you a different, better to read and cropped preview of common typo3 content elements.
+
+Currently this extension provides better previews to those elements:
+
+- html
+- table
+- bullets (ul)
+- bullets (dl)
