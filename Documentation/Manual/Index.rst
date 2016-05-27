@@ -3,9 +3,9 @@
 .. --------------------------------------------------
 .. -*- coding: utf-8 -*- with BOM.
 
-.. include:: Includes.txt
+.. include:: ../Includes.txt
 
-.. _introduction:
+.. _manual:
 
 ======
 Manual
@@ -16,7 +16,7 @@ Manual
 All neccessary informations how to use EXT:costumcontentpreview.
 
 .. toctree::
-	:maxdepth: 5
-	:titlesonly:
+    :maxdepth: 3
+    :titlesonly:
 
-        	Manual/Index
+    Installation/Index

@@ -19,7 +19,9 @@ Some ways to support me
 Steam Items
 -----------
 
-Because I am addicted to tf2 and trading inside the steam universe, I always need new items. Unusual hats, trading cards and CS:GO skins are welcome. Create a trade offer by clicking here: https://steamcommunity.com/linkfilter/?url=https://steamcommunity.com/tradeoffer/new/?partner=54923972&token=bIykmlUe
+Because I am addicted to tf2 and trading inside the steam universe, I always need new items. Unusual hats, trading cards and CS:GO skins are welcome. Create a trade offer by following `a link`_.
+
+.. _a link: https://steamcommunity.com/tradeoffer/new/?partner=54923972&token=bIykmlUe
 
 Donate or flattr
 ----------------

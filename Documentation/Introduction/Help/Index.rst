@@ -30,5 +30,5 @@ If you like to chat, you can reach me during daytime: https://typo3.slack.com/me
    If you are not yet registered, use http://forger.typo3.org/slack for that!
 
 New features for sponsoring
---------------------------
+---------------------------
 You need a stunning new feature which is not yet implemented? Try to contact me! Maybe we'll find a way!
