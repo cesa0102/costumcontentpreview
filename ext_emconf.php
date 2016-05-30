@@ -1,11 +1,5 @@
 <?php
 
-/***************************************************************
- *
- * Extension Manager/Repository config file for ext: "costumcontentpreview"
- *
- ***************************************************************/
-
 $EM_CONF[$_EXTKEY] = array(
     'title' => 'Cropped and better visibile content elements',
     'description' => 'Adds a better preview for the elements: html, table and bullets.',
@@ -17,7 +11,7 @@ $EM_CONF[$_EXTKEY] = array(
     'uploadfolder' => '0',
     'createDirs' => '',
     'clearCacheOnLoad' => 0,
-    'version' => '0.1.6',
+    'version' => '0.1.7',
     'constraints' => array(
         'depends' => array(
             'typo3' => '7.6.0-7.9.99'

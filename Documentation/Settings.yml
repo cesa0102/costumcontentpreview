@@ -1,0 +1,8 @@
+conf.py:
+  copyright: 2016
+  project:
+  version: 0.1
+  release: 0.1.7
+  html_theme_options:
+    github_repository: mieserfettsack/costumcontentpreview
+    github_branch: master
