@@ -1,6 +1,6 @@
 conf.py:
   copyright: 2016
-  project:
+  project: Cropped and better visibile content elements
   version: 0.1
   release: 0.1.7
   html_theme_options:
