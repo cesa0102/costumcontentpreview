@@ -2,7 +2,7 @@ conf.py:
   copyright: 2016
   project: Cropped and better visibile content elements
   version: 0.1
-  release: 0.1.7
+  release: 0.1.8
   html_theme_options:
     github_repository: mieserfettsack/costumcontentpreview
     github_branch: master
