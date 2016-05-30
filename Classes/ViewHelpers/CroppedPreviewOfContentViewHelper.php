@@ -66,11 +66,11 @@ class CroppedPreviewOfContentViewHelper extends AbstractViewHelper
         $contentWrap = $this->arguments['contentWrap'];
         $output = "";
 
+        /* @var \TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer $cObject */
         $cObject = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer');
 
-
         if ($content && $linesToCrop > 0) {
-            if ($explodeRows) {
+            if ($exlodeRows) {
                 $contentLines = explode($explodeRows, $content);
             } else {
                 $contentLines = $this->splitNewLine($content);
