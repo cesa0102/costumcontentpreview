@@ -1,70 +1,26 @@
 <?php
 
-namespace Mdy\Costumcontentpreview\ViewHelpers;
+namespace Mdy\Costumcontentpreview\Render;
 
-use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
-/**
- * Class CroppedPreviewOfContentViewHelper
- *
- * @package Mdy\Costumcontentpreview\ViewHelpers
- */
-class CroppedPreviewOfContentViewHelper extends AbstractViewHelper
+class RenderPreviews
 {
-
-    /**
-     * Arguments Initialization
-     */
-    public function initializeArguments()
-    {
-        $this->registerArgument(
-            'content', 'string', 'content to be used inside viewhelper. E.g. bodytext', TRUE
-        );
-
-        $this->registerArgument(
-            'linesToCrop', 'int', 'amount of lines', FALSE, 3
-        );
-
-        $this->registerArgument(
-            'explodeRows', 'string', 'string to split content', FALSE
-        );
-
-        $this->registerArgument(
-            'explodeItems', 'string', 'string to split lines', FALSE
-        );
-
-        $this->registerArgument(
-            'itemWrap', 'string', 'a wrap that will pear around each item', FALSE
-        );
-
-        $this->registerArgument(
-            'lineWrap', 'string', 'a wrap that will pear around each line', FALSE
-        );
-
-        $this->registerArgument(
-            'contentWrap', 'string', 'a wrap that will pear around the complete output', FALSE, "|"
-        );
-    }
-
     private function splitNewLine($text)
     {
         $code = preg_replace('/\n$/', '', preg_replace('/^\n/', '', preg_replace('/[\r\n]+/', "\n", $text)));
         return explode("\n", $code);
     }
 
-    /**
-     * @return string $output
-     */
-    public function render()
+    public function output($content,$outputConfig)
     {
-        $content = $this->arguments['content'];
-        $linesToCrop = intval($this->arguments['linesToCrop']);
-        $explodeRows = $this->arguments['explodeRows'];
-        $explodeItems = $this->arguments['explodeItems'];
-        $itemWrap = $this->arguments['itemWrap'];
-        $lineWrap = $this->arguments['lineWrap'];
-        $contentWrap = $this->arguments['contentWrap'];
+        $linesToCrop = intval($outputConfig['linesToCrop']);
+        $explodeRows = $outputConfig['explodeRows'];
+        $explodeItems = $outputConfig['explodeItems'];
+        $itemWrap = $outputConfig['itemWrap'];
+        $lineWrap = $outputConfig['lineWrap'];
+        $contentWrap = $outputConfig['contentWrap'];
+        $enableHtmlSpecialChars = $outputConfig['enableHtmlSpecialChars'];
         $output = "";
 
         /* @var \TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer $cObject */
@@ -113,7 +69,12 @@ class CroppedPreviewOfContentViewHelper extends AbstractViewHelper
                 }
             }
 
-            $output = $cObject->wrap($output, $contentWrap);
+            if ($enableHtmlSpecialChars === true) {
+                $output = $cObject->wrap(htmlspecialchars($output, ENT_QUOTES), $contentWrap);
+            }
+            else {
+                $output = $cObject->wrap($output, $contentWrap);
+            }
 
             if ($contentAmoutOfLines > $linesToCrop) {
                 $output .= "...";
@@ -122,5 +83,4 @@ class CroppedPreviewOfContentViewHelper extends AbstractViewHelper
 
         return $output;
     }
-
 }
