@@ -30,7 +30,7 @@ class PageLayoutView implements \TYPO3\CMS\Backend\View\PageLayoutViewDrawItemHo
                     $row['bodytext'],
                     [
                         'linesToCrop' => 10,
-                        'contentWrap' => '<pre>|</pre>',
+                        'contentWrap' => '<pre class="ccpPreWrap">|</pre>',
                         'enableHtmlSpecialChars' => true
                     ]
                 );

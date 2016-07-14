@@ -55,9 +55,9 @@ class RenderPreviews
                     $newSingleLine = "";
                     foreach ($contentRowItems as $i => $singleItem) {
                         if ($i % 2 == 0) {
-                            $output .= $cObject->wrap($singleItem, "<dt>|</dt>");
+                            $output .= $cObject->wrap($singleItem, '<dt class="ccpDtItem">|</dt>');
                         } else {
-                            $output .= $cObject->wrap($singleItem, "<dd>|</dd>");
+                            $output .= $cObject->wrap($singleItem, '<dd class="ccpDdItem">|</dd>');
                         }
                     }
                 } else {

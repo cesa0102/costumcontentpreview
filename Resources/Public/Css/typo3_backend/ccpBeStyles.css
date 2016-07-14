@@ -26,3 +26,29 @@ and open the template in the editor.
     border: 0.125em solid #D0D0D0;
     text-align: center;
 }
+
+.ccpPreWrap {
+    display: block;
+    padding: 8.5px;
+    margin: 0 0 9px;
+    font-size: 11px;
+    line-height: 1.5;
+    word-break: break-all;
+    word-wrap: break-word;
+    color: #5a5a5a;
+    background-color: #f5f5f5;
+    border: 1px solid #cccccc;
+    border-radius: 2px;
+}
+
+.ccpDtItem {
+    font-weight: bold;
+}
+
+.ccpDdItem, .ccpDtItem {
+    line-height: 1.5;
+}
+
+.ccpDdItem {
+    margin-left: 0;
+}
