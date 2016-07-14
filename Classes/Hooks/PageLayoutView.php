@@ -18,50 +18,49 @@ class PageLayoutView implements \TYPO3\CMS\Backend\View\PageLayoutViewDrawItemHo
      */
     public function preProcess(\TYPO3\CMS\Backend\View\PageLayoutView &$parentObject, &$drawItem, &$headerContent, &$itemContent, array &$row)
     {
-        $drawItem = FALSE;
-
         /* @var \Mdy\Costumcontentpreview\Render\RenderPreviews $RenderPreviews */
         $RenderPreviews = GeneralUtility::makeInstance('Mdy\Costumcontentpreview\Render\RenderPreviews');
 
-        switch ($row['CType']) {
-            case "html":
-                $headerContent = '<b>' . PageLayoutView::cropHeader($row['header'], $row['bodytext']) . '</b><br>';
-                $itemContent = $RenderPreviews->output(
-                    $row['bodytext'],
-                    [
-                        'linesToCrop' => 9,
-                        'contentWrap' => '<pre class="ccpPreWrap">|</pre>',
-                        'enableHtmlSpecialChars' => true
-                    ]
-                );
+        if ($row['CType'] === 'html') {
 
-                break;
-            case "table":
-                $headerContent = '<b>' . PageLayoutView::cropHeader($row['header'], $row['bodytext']) . '</b><br>';
-                $itemContent = $RenderPreviews->output(
-                    $row['bodytext'],
-                    [
-                        'linesToCrop' => 6,
-                        'contentWrap' => '<table class="ccpTableWrap">|</table>',
-                        'lineWrap' => '<tr>|</tr>',
-                        'itemWrap' => '<td class="ccpTableTd">|</td>',
-                        'explodeItems' => '|'
-                    ]
-                );
+            $headerContent = '<b>' . PageLayoutView::cropHeader($row['header'], $row['bodytext']) . '</b><br>';
+            $itemContent = $RenderPreviews->output(
+                $row['bodytext'],
+                [
+                    'linesToCrop' => 9,
+                    'contentWrap' => '<pre class="ccpPreWrap">|</pre>',
+                    'enableHtmlSpecialChars' => true
+                ]
+            );
+            $drawItem = FALSE;
+        }
 
-                break;
-            case "bullets":
-                $headerContent = '<b>' . PageLayoutView::cropHeader($row['header'], $row['bodytext']) . '</b><br>';
-                $itemContent = $RenderPreviews->output(
-                    $row['bodytext'],
-                    [
-                        'linesToCrop' => 5,
-                        'contentWrap' => '<ul class="ccpUlWrap">|</ul>',
-                        'lineWrap' => '<li>|</li>'
-                    ]
-                );
+        if ($row['CType'] === 'table') {
+            $headerContent = '<b>' . PageLayoutView::cropHeader($row['header'], $row['bodytext']) . '</b><br>';
+            $itemContent = $RenderPreviews->output(
+                $row['bodytext'],
+                [
+                    'linesToCrop' => 6,
+                    'contentWrap' => '<table class="ccpTableWrap">|</table>',
+                    'lineWrap' => '<tr>|</tr>',
+                    'itemWrap' => '<td class="ccpTableTd">|</td>',
+                    'explodeItems' => '|'
+                ]
+            );
+            $drawItem = FALSE;
+        }
 
-                break;
+        if ($row['CType'] === 'bullets') {
+            $headerContent = '<b>' . PageLayoutView::cropHeader($row['header'], $row['bodytext']) . '</b><br>';
+            $itemContent = $RenderPreviews->output(
+                $row['bodytext'],
+                [
+                    'linesToCrop' => 5,
+                    'contentWrap' => '<ul class="ccpUlWrap">|</ul>',
+                    'lineWrap' => '<li>|</li>'
+                ]
+            );
+            $drawItem = FALSE;
         }
     }
 
