@@ -29,7 +29,7 @@ class PageLayoutView implements \TYPO3\CMS\Backend\View\PageLayoutViewDrawItemHo
                 $itemContent = $RenderPreviews->output(
                     $row['bodytext'],
                     [
-                        'linesToCrop' => 10,
+                        'linesToCrop' => 9,
                         'contentWrap' => '<pre class="ccpPreWrap">|</pre>',
                         'enableHtmlSpecialChars' => true
                     ]
@@ -41,7 +41,7 @@ class PageLayoutView implements \TYPO3\CMS\Backend\View\PageLayoutViewDrawItemHo
                 $itemContent = $RenderPreviews->output(
                     $row['bodytext'],
                     [
-                        'linesToCrop' => 5,
+                        'linesToCrop' => 6,
                         'contentWrap' => '<table class="ccpTableWrap">|</table>',
                         'lineWrap' => '<tr>|</tr>',
                         'itemWrap' => '<td class="ccpTableTd">|</td>',
@@ -55,7 +55,7 @@ class PageLayoutView implements \TYPO3\CMS\Backend\View\PageLayoutViewDrawItemHo
                 $itemContent = $RenderPreviews->output(
                     $row['bodytext'],
                     [
-                        'linesToCrop' => 10,
+                        'linesToCrop' => 5,
                         'contentWrap' => '<ul class="ccpUlWrap">|</ul>',
                         'lineWrap' => '<li>|</li>'
                     ]
