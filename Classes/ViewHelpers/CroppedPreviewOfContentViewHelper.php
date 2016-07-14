@@ -45,12 +45,10 @@ class CroppedPreviewOfContentViewHelper extends AbstractViewHelper
         $this->registerArgument(
             'contentWrap', 'string', 'a wrap that will pear around the complete output', FALSE, "|"
         );
-    }
 
-    private function splitNewLine($text)
-    {
-        $code = preg_replace('/\n$/', '', preg_replace('/^\n/', '', preg_replace('/[\r\n]+/', "\n", $text)));
-        return explode("\n", $code);
+        $this->registerArgument(
+            'enableHtmlSpecialChars', 'boolean', 'Switch to enable enableHtmlSpecialChars for each line', FALSE, FALSE
+        );
     }
 
     /**
@@ -58,67 +56,21 @@ class CroppedPreviewOfContentViewHelper extends AbstractViewHelper
      */
     public function render()
     {
-        $content = $this->arguments['content'];
-        $linesToCrop = intval($this->arguments['linesToCrop']);
-        $explodeRows = $this->arguments['explodeRows'];
-        $explodeItems = $this->arguments['explodeItems'];
-        $itemWrap = $this->arguments['itemWrap'];
-        $lineWrap = $this->arguments['lineWrap'];
-        $contentWrap = $this->arguments['contentWrap'];
-        $output = "";
+        /* @var \Mdy\Costumcontentpreview\Render\RenderPreviews $RenderPreviews */
+        $RenderPreviews = GeneralUtility::makeInstance('Mdy\Costumcontentpreview\Render\RenderPreviews');
 
-        /* @var \TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer $cObject */
-        $cObject = GeneralUtility::makeInstance('TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer');
-
-        if ($content && $linesToCrop > 0) {
-            if ($explodeRows) {
-                $contentLines = explode($explodeRows, $content);
-            } else {
-                $contentLines = $this->splitNewLine($content);
-            }
-
-            $contentAmoutOfLines = count($contentLines);
-            $croppedContentLines = array_splice($contentLines, 0, $linesToCrop);
-
-            foreach ($croppedContentLines as $singleLine) {
-                if ($explodeItems) {
-                    $contentRowItems = explode($explodeItems, $singleLine);
-                    $newSingleLine = "";
-                    foreach ($contentRowItems as $singleItem) {
-                        $newSingleLine .= $cObject->wrap($singleItem, $itemWrap);
-                    }
-
-                    if ($lineWrap) {
-                        $output .= $cObject->wrap($newSingleLine, $lineWrap);
-                    } else {
-                        $output .= $singleLine . "\n";
-                    }
-                } elseif (strpos($singleLine, '|') !== false && !$explodeItems) {
-                    $contentWrap = '<dl class="ccpDlWrap">|</dl>';
-                    $contentRowItems = explode("|", $singleLine);
-                    $newSingleLine = "";
-                    foreach ($contentRowItems as $i => $singleItem) {
-                        if ($i % 2 == 0) {
-                            $output .= $cObject->wrap($singleItem, "<dt>|</dt>");
-                        } else {
-                            $output .= $cObject->wrap($singleItem, "<dd>|</dd>");
-                        }
-                    }
-                } else {
-                    if ($lineWrap) {
-                        $output .= $cObject->wrap($singleLine, $lineWrap);
-                    } else {
-                        $output .= $singleLine . "\n";
-                    }
-                }
-            }
-
-            $output = $cObject->wrap($output, $contentWrap);
-
-            if ($contentAmoutOfLines > $linesToCrop) {
-                $output .= "...";
-            }
-        }
+        $output = $RenderPreviews->output(
+            $this->arguments['content'],
+            [
+                'linesToCrop' => intval($this->arguments['linesToCrop']),
+                'explodeRows' => $this->arguments['explodeRows'],
+                'explodeItems' => $this->arguments['explodeItems'],
+                'itemWrap' => $this->arguments['itemWrap'],
+                'lineWrap' => $this->arguments['lineWrap'],
+                'contentWrap' => $this->arguments['contentWrap'],
+                'enableHtmlSpecialChars' => $this->arguments['enableHtmlSpecialChars']
+            ]
+        );
 
         return $output;
     }
